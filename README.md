@@ -1,8 +1,6 @@
-
 # Pokedex-React
 
-A modern, responsive Pokédex utilizing the PokeAPI built with with React, TypeScript and TailwindCSS.
-
+A modern, responsive Pokédex utilizing the PokeAPI built with with React, TypeScript and Tailwind CSS.
 
 ## Roadmap
 
@@ -10,5 +8,4 @@ A modern, responsive Pokédex utilizing the PokeAPI built with with React, TypeS
 
 - Add evolution details for each Pokémon
 
-- Refactor code for better performance and maintainability.
-
+- Refactor code for better performance and maintainability

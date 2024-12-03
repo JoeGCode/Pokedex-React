@@ -1,11 +1,11 @@
 import { AllPokemonResults } from "../types/allPokemonResults";
 import { PokemonDetails } from "../types/pokemonDetails";
-import { useLocation } from "wouter";
-import { typeLogo } from "../utils/helpers";
+import { typeLogo } from "../utils/consts";
 import Loader from "./Loader";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { usePokemonDetails } from "../hooks/usePokemonDetails";
 import getPokemonCardBackground from "../utils/getPokemonCardBackground";
+import { useUrl } from "crossroad";
 
 type PokemonCardType = {
   pokemonResult: AllPokemonResults;
@@ -17,7 +17,7 @@ export default function PokemonCard({ pokemonResult }: PokemonCardType) {
     false
   );
 
-  const [, setLocation] = useLocation();
+  const [, setUrl] = useUrl();
 
   const [, setSelectedPokemon] = useLocalStorage(
     {} as PokemonDetails,
@@ -35,7 +35,7 @@ export default function PokemonCard({ pokemonResult }: PokemonCardType) {
 
   async function handleClick(pokemon: PokemonDetails) {
     await setSelectedPokemon(pokemon);
-    setLocation(`/details/${pokemon.name}`);
+    setUrl(`/details/${pokemon.name}`);
   }
 
   return (

@@ -17,6 +17,8 @@ import rockLogo from "../assets/images/pokemon_type_logos/rock.png";
 import steelLogo from "../assets/images/pokemon_type_logos/steel.png";
 import waterLogo from "../assets/images/pokemon_type_logos/water.png";
 
+export const ITEMS_PER_PAGE = 12;
+
 export const typeLogo: Record<string, string> = {
   bug: bugLogo,
   dark: darkLogo,

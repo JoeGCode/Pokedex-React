@@ -1,6 +1,6 @@
 import { PokemonDetails } from "../types/pokemonDetails";
 import getPokemonCardBackground from "../utils/getPokemonCardBackground";
-import { typeLogo } from "../utils/helpers";
+import { typeLogo } from "../utils/consts";
 
 type PokemonDetailCardType = {
   pokemon: PokemonDetails;

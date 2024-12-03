@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import { PokemonDetails } from "../types/pokemonDetails";
-import { typeColours } from "./helpers";
+import { typeColours } from "./consts";
 
 export default function getPokemonCardBackground(
   pokemon: PokemonDetails | undefined

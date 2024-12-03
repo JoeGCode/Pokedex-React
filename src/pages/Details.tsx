@@ -1,15 +1,15 @@
-import { useRoute } from "wouter";
 import { usePokemonDetails } from "../hooks/usePokemonDetails";
 import Loader from "../components/Loader";
 import PokemonDetailCard from "../components/PokemonDetailCard";
 import PokemonStatsCard from "../components/PokemonStatsCard";
 import PokemonDescription from "../components/PokemonDescription";
 import PokemonInfo from "../components/PokemonInfo";
+import { useParams } from "crossroad";
 
 export default function Details() {
-  const [match, params] = useRoute("/details/:pokemon");
+  const params = useParams("/details/:pokemon");
   const { pokemon, species, isLoading, error } = usePokemonDetails(
-    match ? params.pokemon : "",
+    params ? params.pokemon : "",
     true
   );
 

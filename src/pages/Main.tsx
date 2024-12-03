@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
-import { useLocation, useRoute } from "wouter";
 import api from "../lib/apiUrl";
 import { AllPokemonResults } from "../types/allPokemonResults";
-import DataPaginator from "../components/DataPaginator";
+import { useQuery } from "crossroad";
+import PokemonResultsDisplay from "../components/PokemonResultsDisplay";
+import Pagination from "../components/Pagination";
+import { ITEMS_PER_PAGE } from "../utils/consts";
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,8 +14,10 @@ export default function Main() {
     []
   );
   const [allPokemon, setAllPokemon] = useState<AllPokemonResults[]>([]);
-  const [, setLocation] = useLocation();
-  const [match, params] = useRoute("/:pokemon");
+  const [query] = useQuery();
+  const pokemonQuery = query.pokemon;
+  const currentPage = Number(query.page) || 1;
+  const totalPages = Math.ceil(filteredPokemon.length / ITEMS_PER_PAGE);
 
   useEffect(function () {
     const controller = new AbortController();
@@ -54,30 +58,33 @@ export default function Main() {
 
   useEffect(
     function () {
-      if (match) {
+      if (pokemonQuery) {
         const filteredPokemon = allPokemon.filter((pokemon) =>
-          pokemon.name.toLowerCase().includes(params.pokemon.toLowerCase())
+          pokemon.name.toLowerCase().includes(pokemonQuery.toLowerCase())
         );
         setFilteredPokemon(filteredPokemon);
       } else {
         setFilteredPokemon(allPokemon);
       }
     },
-    [allPokemon, match, params?.pokemon]
+    [pokemonQuery, allPokemon]
   );
-
-  function searchHandler(query: string) {
-    setLocation(`/${query}`);
-  }
   return (
     <>
-      <SearchBar searchHandler={searchHandler} />
+      <SearchBar />
       {isLoading ? (
         "LOADING..."
       ) : error ? (
         <div>{error}</div>
       ) : (
-        <DataPaginator data={filteredPokemon} />
+        // <DataPaginator data={filteredPokemon} />
+        <>
+          <PokemonResultsDisplay
+            results={filteredPokemon}
+            currentPage={currentPage}
+          />
+          <Pagination totalPages={totalPages} />
+        </>
       )}
     </>
   );

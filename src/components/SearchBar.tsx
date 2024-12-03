@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useQuery, useUrl } from "crossroad";
 
-type SearchBarProps = {
-  searchHandler: (query: string) => void;
-};
+export default function SearchBar() {
+  const [query, setQuery] = useQuery();
+  const [, setUrl] = useUrl();
+  const pokemon = query.pokemon;
 
-export default function SearchBar({ searchHandler }: SearchBarProps) {
-  const [query, setQuery] = useState("");
-
-  function handleSearch(query: string) {
-    setQuery(query);
-    searchHandler(query);
+  function handleSearch(value: string) {
+    if (value) {
+      setQuery({ pokemon: value, page: "1" });
+    } else {
+      setUrl("/");
+    }
   }
 
   return (
@@ -17,8 +18,8 @@ export default function SearchBar({ searchHandler }: SearchBarProps) {
       <input
         className="w-full rounded-md p-4"
         placeholder="Search Pokemon by name"
-        value={query}
         onChange={(e) => handleSearch(e.target.value)}
+        defaultValue={pokemon}
       />
     </div>
   );

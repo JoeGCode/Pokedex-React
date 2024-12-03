@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { typeColours } from "../utils/helpers";
+import { typeColours } from "../utils/consts";
 
 type PokemonStatBarType = {
   value: number;

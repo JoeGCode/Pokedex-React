@@ -1,5 +1,4 @@
 import { useQuery } from "crossroad";
-import React from "react";
 
 type PaginationType = {
   totalPages: number;

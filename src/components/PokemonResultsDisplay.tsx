@@ -16,7 +16,7 @@ function PokemonResultsDisplay({
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   const currentItems = results.slice(indexOfFirstItem, indexOfLastItem);
   return (
-    <div className="w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-[88px]">
+    <div className="w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-[72px]">
       {currentItems.map((item) => (
         <PokemonCard pokemonResult={item} key={item.url} />
       ))}

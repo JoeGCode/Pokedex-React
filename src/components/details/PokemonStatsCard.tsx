@@ -1,8 +1,8 @@
-import { PokemonDetails } from "../types/pokemonDetails";
+import { Pokemon } from "@bgoff1/pokeapi-types";
 import PokemonStatBar from "./PokemonStatBar";
 
 type PokemonStatsCardType = {
-  pokemon: PokemonDetails;
+  pokemon: Pokemon;
 };
 
 export default function PokemonStatsCard({ pokemon }: PokemonStatsCardType) {
@@ -14,7 +14,7 @@ export default function PokemonStatsCard({ pokemon }: PokemonStatsCardType) {
           <PokemonStatBar
             key={stat.stat.name}
             value={stat.base_stat}
-            label={stat.stat.name}
+            label={stat.stat.name.replace("-", " ")}
             mainType={pokemon.types[0].type.name}
           />
         ))}

@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { typeColours } from "../utils/consts";
+import { typeColours } from "../../utils/consts";
 
 type PokemonStatBarType = {
   value: number;
@@ -29,7 +29,9 @@ export default function PokemonStatBar({
         </div>
         <div style={fillStyle} className="absolute bottom-0 left-0 right-0" />
       </div>
-      <span className="text-xs w-full text-center md:text-base">{label}</span>
+      <span className="text-[10px] sm:text-sm lg:text-base w-full text-center capitalize">
+        {label}
+      </span>
     </div>
   );
 }

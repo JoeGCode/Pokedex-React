@@ -1,40 +1,31 @@
-import { AllPokemonResults } from "../types/allPokemonResults";
-import { PokemonDetails } from "../types/pokemonDetails";
-import { typeLogo } from "../utils/consts";
-import Loader from "./Loader";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { usePokemonDetails } from "../hooks/usePokemonDetails";
-import getPokemonCardBackground from "../utils/getPokemonCardBackground";
+import { Pokemon } from "@bgoff1/pokeapi-types";
 import { useUrl } from "crossroad";
+import usePokemonCardData from "../hooks/usePokemonCardData";
+import { typeLogo } from "../utils/consts";
+import getPokemonCardBackground from "../utils/getPokemonCardBackground";
+import { getPokemonImageURL } from "../utils/getPokemonImageURL";
+import Loader from "./Loader";
 
 type PokemonCardType = {
-  pokemonResult: AllPokemonResults;
+  pokemonName: string;
+  highlighted?: boolean;
+  compact?: boolean;
 };
 
-export default function PokemonCard({ pokemonResult }: PokemonCardType) {
-  const { pokemon, isLoading, error } = usePokemonDetails(
-    pokemonResult.name,
-    false
-  );
+export default function PokemonCard({
+  pokemonName,
+  highlighted = false,
+  compact = false,
+}: PokemonCardType) {
+  const { pokemonCardData, isLoading, error } = usePokemonCardData(pokemonName);
 
   const [, setUrl] = useUrl();
 
-  const [, setSelectedPokemon] = useLocalStorage(
-    {} as PokemonDetails,
-    "selectedPokemon"
-  );
+  const imageURL = getPokemonImageURL(pokemonCardData);
 
-  const imageURL = pokemon
-    ? pokemon.sprites.front_default ??
-      pokemon.sprites.other.dream_world.front_default ??
-      pokemon.sprites.other.home.front_default ??
-      pokemon.sprites.other["official-artwork"].front_default
-    : "";
+  const backgroundStyle = getPokemonCardBackground(pokemonCardData);
 
-  const backgroundStyle = getPokemonCardBackground(pokemon);
-
-  async function handleClick(pokemon: PokemonDetails) {
-    await setSelectedPokemon(pokemon);
+  async function handleClick(pokemon: Pokemon) {
     setUrl(`/details/${pokemon.name}`);
   }
 
@@ -44,33 +35,36 @@ export default function PokemonCard({ pokemonResult }: PokemonCardType) {
         <Loader />
       ) : error ? (
         <div>{error}</div>
-      ) : pokemon ? (
-        <div onClick={() => handleClick(pokemon)}>
-          <div
-            style={backgroundStyle}
-            className="flex flex-col shadow-lg items-center justify-center p-4 rounded-2xl cursor-pointer transition-transform hover:scale-105"
-          >
-            <h1 className="capitalize text-2xl font-bold">{pokemon.name}</h1>
-            <h3 className="text-lg">{`#${pokemon.id}`}</h3>
-            <div className="w-[186px]">
-              <img
-                className="w-full block animate-[slight-bounce_1s_ease_infinite]"
-                src={imageURL}
-                alt={pokemon.name}
-              />
-            </div>
-            <div className="flex justify-evenly w-full">
-              {pokemon.types.map((type, index) => {
-                return (
-                  <img
-                    src={typeLogo[type.type.name]}
-                    alt={type.type.name}
-                    className="w-1/3 max-w-[150px]"
-                    key={index}
-                  />
-                );
-              })}
-            </div>
+      ) : pokemonCardData ? (
+        <div
+          onClick={() => handleClick(pokemonCardData)}
+          style={backgroundStyle}
+          className={`flex flex-col shadow-lg items-center justify-center rounded-2xl cursor-pointer transition-transform hover:scale-105 ${
+            highlighted ? "border-4 border-black " : ""
+          } ${compact ? "p-2" : "p-4"}`}
+        >
+          <h1 className="capitalize text-2xl font-bold">
+            {pokemonCardData.name}
+          </h1>
+          <h2>{`#${pokemonCardData.id.toString().padStart(4, "0")}`}</h2>
+          <div className={`${compact ? "size-24" : "size-48"}`}>
+            <img
+              className="w-full block animate-[slight-bounce_1s_ease_infinite]"
+              src={imageURL}
+              alt={pokemonCardData.name}
+            />
+          </div>
+          <div className="flex justify-evenly w-full">
+            {pokemonCardData.types.map((type, index) => {
+              return (
+                <img
+                  src={typeLogo[type.type.name]}
+                  alt={type.type.name}
+                  className="w-1/3 max-w-[150px]"
+                  key={index}
+                />
+              );
+            })}
           </div>
         </div>
       ) : (

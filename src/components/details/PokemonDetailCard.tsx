@@ -1,20 +1,16 @@
-import { PokemonDetails } from "../types/pokemonDetails";
-import getPokemonCardBackground from "../utils/getPokemonCardBackground";
-import { typeLogo } from "../utils/consts";
+import { Pokemon } from "@bgoff1/pokeapi-types";
+import { typeLogo } from "../../utils/consts";
+import getPokemonCardBackground from "../../utils/getPokemonCardBackground";
+import { getPokemonDetailImageURL } from "../../utils/getPokemonImageURL";
 
 type PokemonDetailCardType = {
-  pokemon: PokemonDetails;
+  pokemon: Pokemon;
 };
 
 export default function PokemonDetailCard({ pokemon }: PokemonDetailCardType) {
   const backgroundStyle = getPokemonCardBackground(pokemon);
 
-  const imageURL =
-    pokemon.sprites.other.home.front_default ??
-    pokemon.sprites.other.dream_world.front_default ??
-    pokemon.sprites.other["official-artwork"].front_default ??
-    pokemon.sprites.front_default ??
-    "";
+  const imageURL = getPokemonDetailImageURL(pokemon);
 
   return (
     <section

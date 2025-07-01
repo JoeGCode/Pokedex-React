@@ -1,10 +1,10 @@
-import { AllPokemonResults } from "../types/allPokemonResults";
-import { ITEMS_PER_PAGE } from "../utils/consts";
-import PokemonCard from "./PokemonCard";
+import { NamedAPIResource } from "@bgoff1/pokeapi-types";
+import { ITEMS_PER_PAGE } from "../../utils/consts";
+import PokemonCard from "../PokemonCard";
 
 type PokemonResultsDisplayType = {
   currentPage: number;
-  results: AllPokemonResults[];
+  results: NamedAPIResource[];
 };
 
 function PokemonResultsDisplay({
@@ -18,7 +18,7 @@ function PokemonResultsDisplay({
   return (
     <div className="w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-[72px]">
       {currentItems.map((item) => (
-        <PokemonCard pokemonResult={item} key={item.url} />
+        <PokemonCard pokemonName={item.name} key={item.url} />
       ))}
     </div>
   );

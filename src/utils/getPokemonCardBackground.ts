@@ -1,10 +1,8 @@
+import { Pokemon } from "@bgoff1/pokeapi-types";
 import { CSSProperties } from "react";
-import { PokemonDetails } from "../types/pokemonDetails";
 import { typeColours } from "./consts";
 
-export default function getPokemonCardBackground(
-  pokemon: PokemonDetails | undefined
-) {
+export default function getPokemonCardBackground(pokemon: Pokemon | undefined) {
   const backgroundStyle: CSSProperties =
     pokemon && pokemon.types.length == 1
       ? { backgroundColor: typeColours[pokemon.types[0].type.name] }

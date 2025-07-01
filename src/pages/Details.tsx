@@ -1,35 +1,45 @@
-import { usePokemonDetails } from "../hooks/usePokemonDetails";
-import Loader from "../components/Loader";
-import PokemonDetailCard from "../components/PokemonDetailCard";
-import PokemonStatsCard from "../components/PokemonStatsCard";
-import PokemonDescription from "../components/PokemonDescription";
-import PokemonInfo from "../components/PokemonInfo";
 import { useParams } from "crossroad";
+import Loader from "../components/Loader";
+import PokemonDescription from "../components/details/PokemonDescription";
+import PokemonDetailCard from "../components/details/PokemonDetailCard";
+import PokemonEvolutionChain from "../components/details/PokemonEvolutionChain";
+import PokemonInfo from "../components/details/PokemonInfo";
+import PokemonMoves from "../components/details/PokemonMoves";
+import PokemonStatsCard from "../components/details/PokemonStatsCard";
+import usePokemonDetails from "../hooks/usePokemonDetails";
 
 export default function Details() {
   const params = useParams("/details/:pokemon");
-  const { pokemon, species, isLoading, error } = usePokemonDetails(
-    params ? params.pokemon : "",
-    true
-  );
+  console.log(params.pokemon);
+  const { pokemonDetails, evolutionDetails, pokemonSpecies, isLoading, error } =
+    usePokemonDetails(params.pokemon);
 
   if (isLoading || error) {
     return isLoading ? <Loader /> : <div>{error}</div>;
   }
-  if (!pokemon || !species) {
+  if (!pokemonDetails || !pokemonSpecies) {
     return <Loader />;
   }
 
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-2 md:flex-row">
-        <PokemonDetailCard pokemon={pokemon} />
+        <PokemonDetailCard pokemon={pokemonDetails} />
         <div className="flex flex-col gap-2">
-          <PokemonDescription species={species} />
-          <PokemonInfo pokemon={pokemon} species={species} />
+          <PokemonDescription species={pokemonSpecies} />
+          <PokemonInfo pokemon={pokemonDetails} species={pokemonSpecies} />
         </div>
       </div>
-      <PokemonStatsCard pokemon={pokemon} />
+      <div className="flex flex-col md:flex-row gap-2 items-stretch">
+        <PokemonStatsCard pokemon={pokemonDetails} />
+        <PokemonMoves moves={pokemonDetails.moves} />
+      </div>
+      {evolutionDetails && (
+        <PokemonEvolutionChain
+          currentPokemonName={pokemonDetails.name}
+          evolutionList={evolutionDetails}
+        />
+      )}
     </div>
   );
 }

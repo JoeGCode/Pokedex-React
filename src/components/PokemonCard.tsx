@@ -43,7 +43,11 @@ export default function PokemonCard({
             highlighted ? "border-4 border-black " : ""
           } ${compact ? "p-2" : "p-4"}`}
         >
-          <h1 className="capitalize text-2xl font-bold">
+          <h1
+            className={`capitalize text-center font-bold ${
+              compact ? "text-lg" : "text-2xl"
+            }`}
+          >
             {pokemonCardData.name}
           </h1>
           <h2>{`#${pokemonCardData.id.toString().padStart(4, "0")}`}</h2>

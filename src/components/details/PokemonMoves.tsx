@@ -12,7 +12,7 @@ function PokemonMoves({ moves }: Props) {
         {moves.map((move) => (
           <span
             key={move.move.name}
-            className="bg-white/10 rounded-lg p-2 text-sm capitalize"
+            className="bg-white/10 rounded-lg p-2 text-sm capitalize flex justify-center items-center"
           >
             {move.move.name}
           </span>

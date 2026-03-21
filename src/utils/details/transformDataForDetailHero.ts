@@ -1,9 +1,8 @@
-import {
+import getPokemonCardBackground, {
   formatId,
   getFirstEnglishDescription,
   getFirstEnglishGenus,
 } from "@/utils/functions";
-import getPokemonCardBackground from "@/utils/getPokemonCardBackground";
 import { getPokemonImageURL } from "@/utils/getPokemonImageURL";
 import { Pokemon, PokemonSpecies } from "@bgoff1/pokeapi-types";
 

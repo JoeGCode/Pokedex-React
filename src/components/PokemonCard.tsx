@@ -1,7 +1,7 @@
 import Loader from "@/components/Loader";
 import TypeBadge from "@/components/TypeBadge";
 import { typeColours } from "@/utils/consts";
-import { formatId } from "@/utils/functions";
+import getPokemonCardBackground, { formatId } from "@/utils/functions";
 import { getPokemonImageURL } from "@/utils/getPokemonImageURL";
 import { Pokemon } from "@bgoff1/pokeapi-types";
 import { useUrl } from "crossroad";

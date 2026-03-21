@@ -9,7 +9,7 @@ export default function Pagination({ totalPages }: PaginationType) {
   const currentPage = Number(page) || 1;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 w-full bg-secondary text-white">
+    <div className="fixed bottom-0 left-0 right-0 w-full bg-primary border-t  border-white/10 text-white">
       <div className="w-full mx-auto py-2 px-4 max-w-screen-xl grid grid-cols-5 gap-2">
         <PaginationButton
           text="<<"

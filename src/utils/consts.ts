@@ -17,8 +17,6 @@ import rockLogo from "../assets/images/pokemon_type_logos/rock.png";
 import steelLogo from "../assets/images/pokemon_type_logos/steel.png";
 import waterLogo from "../assets/images/pokemon_type_logos/water.png";
 
-export const ITEMS_PER_PAGE = 12;
-
 export const typeLogo: Record<string, string> = {
   bug: bugLogo,
   dark: darkLogo,
@@ -40,23 +38,44 @@ export const typeLogo: Record<string, string> = {
   water: waterLogo,
 };
 
+// export const typeColours: Record<string, string> = {
+//   bug: "#a0a61f",
+//   dark: "#4e4545",
+//   dragon: "#5362d7",
+//   electric: "#ffdc00",
+//   fairy: "#ffb3ff",
+//   fighting: "#ffa400",
+//   fire: "#ff6128",
+//   flying: "#96caff",
+//   ghost: "#6e4371",
+//   grass: "#40c01f",
+//   ground: "#ad7a36",
+//   ice: "#40c0ff",
+//   normal: "#9a9a9a",
+//   poison: "#9a4cd0",
+//   psychic: "#ff6380",
+//   rock: "#bdb98a",
+//   steel: "#6ab0d4",
+//   water: "#2493ff",
+// };
+
 export const typeColours: Record<string, string> = {
-  bug: "#a0a61f",
-  dark: "#4e4545",
-  dragon: "#5362d7",
-  electric: "#ffdc00",
-  fairy: "#ffb3ff",
-  fighting: "#ffa400",
-  fire: "#ff6128",
-  flying: "#96caff",
-  ghost: "#6e4371",
-  grass: "#40c01f",
-  ground: "#ad7a36",
-  ice: "#40c0ff",
-  normal: "#9a9a9a",
-  poison: "#9a4cd0",
-  psychic: "#ff6380",
-  rock: "#bdb98a",
-  steel: "#6ab0d4",
-  water: "#2493ff",
+  bug: "#666e35",
+  dark: "#383636",
+  dragon: "#4b5280",
+  electric: "#8f8238",
+  fairy: "#8a528a",
+  fighting: "#80482d",
+  fire: "#8a402a",
+  flying: "#546475",
+  ghost: "#59415c",
+  grass: "#416636",
+  ground: "#705b3d",
+  ice: "#476d7d",
+  normal: "#6b6b6b",
+  poison: "#634775",
+  psychic: "#8a435d",
+  rock: "#63604f",
+  steel: "#5e6973",
+  water: "#36597a",
 };

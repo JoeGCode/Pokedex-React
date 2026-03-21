@@ -20,10 +20,10 @@ export function getPokemonImageURL(pokemon: Pokemon | undefined) {
   const sprites: FullPokemonSprites = pokemon.sprites;
 
   const imageURL =
-    sprites.front_default ??
-    sprites.other?.dream_world?.front_default ??
-    sprites.other?.home?.front_default ??
     sprites.other?.["official-artwork"]?.front_default ??
+    sprites.other?.home?.front_default ??
+    sprites.other?.dream_world?.front_default ??
+    sprites.front_default ??
     "";
 
   return imageURL;

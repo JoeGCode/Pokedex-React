@@ -1,5 +1,6 @@
 import { ChainLink, Pokemon, PokemonSpecies } from "@bgoff1/pokeapi-types";
-import { typeColours } from "./consts";
+import { typeColours } from "@/utils/typeColours";
+import { FullPokemonSprites } from "@/types/api.types";
 
 export function normalizeString(str: string) {
   return str.trim().toLowerCase();
@@ -57,7 +58,7 @@ export function getFirstEnglishGenus(species: PokemonSpecies) {
   return englishGenus;
 }
 
-export default function getPokemonCardBackground(pokemon: Pokemon | undefined) {
+export function getPokemonCardBackground(pokemon: Pokemon | undefined) {
   const gradient =
     "linear-gradient(145deg, rgba(var(--color-primary)) 5%, transparent)," +
     (pokemon && pokemon.types.length == 1
@@ -67,4 +68,15 @@ export default function getPokemonCardBackground(pokemon: Pokemon | undefined) {
         : "");
 
   return gradient;
+}
+
+export function getPokemonCardImageURL(sprites: FullPokemonSprites) {
+  const imageURL =
+    sprites.other?.["official-artwork"]?.front_default ??
+    sprites.other?.home?.front_default ??
+    sprites.other?.dream_world?.front_default ??
+    sprites.front_default ??
+    "";
+
+  return imageURL;
 }

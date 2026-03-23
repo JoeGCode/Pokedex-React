@@ -59,23 +59,4 @@ export const typeLogo: Record<string, string> = {
 //   water: "#2493ff",
 // };
 
-export const typeColours: Record<string, string> = {
-  bug: "#666e35",
-  dark: "#383636",
-  dragon: "#4b5280",
-  electric: "#8f8238",
-  fairy: "#8a528a",
-  fighting: "#80482d",
-  fire: "#8a402a",
-  flying: "#546475",
-  ghost: "#59415c",
-  grass: "#416636",
-  ground: "#705b3d",
-  ice: "#476d7d",
-  normal: "#6b6b6b",
-  poison: "#634775",
-  psychic: "#8a435d",
-  rock: "#63604f",
-  steel: "#5e6973",
-  water: "#36597a",
-};
+

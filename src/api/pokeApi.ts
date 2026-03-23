@@ -1,5 +1,5 @@
 import { ITEMS_PER_PAGE } from "@/constants/layout";
-import { AllPokemonCall } from "@/types/pokemon";
+import { AllPokemonCall } from "@/types/api.types.ts";
 import { normalizeString } from "@/utils/functions";
 import { Endpoints, Pokemon } from "@bgoff1/pokeapi-types";
 

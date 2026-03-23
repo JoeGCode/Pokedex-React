@@ -4,12 +4,15 @@ import {
   fetchPokemonDetailByName,
   fetchPokemonSpeciesByName,
   fetchWithCache,
-} from "../services/api";
+} from "../api/pokeApi";
 import { getNamesFromEvolutionChain } from "../utils/functions";
+import { PokemonFullDetailsData } from "@/types/custom.types";
+import { transformToPokemonFullDetails } from "@/transformers/pokemonTransformers";
 
 type PokemonFullDetailsState = {
   isLoading: boolean;
   error: string | null;
+  fullDetails: PokemonFullDetailsData | null;
   data: {
     details: Pokemon | null;
     species: PokemonSpecies | null;
@@ -21,6 +24,7 @@ export function usePokemonFullDetails(pokemonName: string) {
   const [state, setState] = useState<PokemonFullDetailsState>({
     isLoading: false,
     error: null,
+    fullDetails: null,
     data: {
       details: null,
       species: null,
@@ -44,6 +48,9 @@ export function usePokemonFullDetails(pokemonName: string) {
             fetchPokemonSpeciesByName(pokemonName, controller.signal),
           ]);
 
+          console.log(details);
+          console.log(species);
+
           const evolutionChain = await fetchWithCache<
             Endpoints["/evolution-chain/:id"]["data"]
           >(species.evolution_chain.url, controller.signal);
@@ -58,10 +65,13 @@ export function usePokemonFullDetails(pokemonName: string) {
             ),
           );
 
+          const fullDetails = transformToPokemonFullDetails(details, species);
+
           setState((prevState) => ({
             ...prevState,
             isLoading: false,
             error: null,
+            fullDetails,
             data: {
               details,
               species,

@@ -1,4 +1,4 @@
-import { typeColours } from "../utils/consts";
+import { typeColours } from "@/utils/typeColours";
 
 const TypeBadge = ({ type }: { type: string }) => {
   const colour = typeColours[type];

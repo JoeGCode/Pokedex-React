@@ -1,12 +1,13 @@
-import { fetchPokemonPage } from "@/services/api";
-import { Pokemon } from "@bgoff1/pokeapi-types";
+import { fetchPokemonPage } from "@/api/pokeApi";
+import { transformToPokemonCardData } from "@/transformers/pokemonTransformers";
+import { PokemonCardData } from "@/types/custom.types";
 import { useEffect, useState } from "react";
 
 type UsePokemonPageState = {
   isLoading: boolean;
   error: string | null;
   totalResults: number;
-  results: Pokemon[];
+  results: PokemonCardData[];
 };
 export function usePokemonPage() {
   const [state, setState] = useState<UsePokemonPageState>({
@@ -32,11 +33,15 @@ export function usePokemonPage() {
           return;
         }
 
+        const transformedResults = data.results.map((pokemon) =>
+          transformToPokemonCardData(pokemon),
+        );
+
         setState({
           isLoading: false,
           error: null,
           totalResults: data.total,
-          results: data.results,
+          results: transformedResults,
         });
       } catch (error) {
         if (error instanceof Error && error.name === "AbortError") {

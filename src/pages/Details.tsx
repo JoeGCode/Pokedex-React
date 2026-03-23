@@ -1,8 +1,10 @@
 import PokemonDetailHero from "@/components/details/PokemonDetailHero";
+import PokemonVitals from "@/components/details/PokemonVitals";
 import { usePokemonFullDetails } from "@/hooks/usePokemonFullDetails";
 
 export default function Details({ pokemonName }: { pokemonName: string }) {
-  const { isLoading, error, data } = usePokemonFullDetails(pokemonName);
+  const { isLoading, error, data, fullDetails } =
+    usePokemonFullDetails(pokemonName);
 
   if (error) {
     return <div className="text-red-600">{error}</div>;
@@ -13,10 +15,11 @@ export default function Details({ pokemonName }: { pokemonName: string }) {
 
   const { details: pokemon, species, evolutions } = data;
 
-  if (pokemon && species) {
+  if (fullDetails) {
     return (
       <div className="flex flex-col w-full border border-white/10 rounded-2xl">
-        <PokemonDetailHero pokemon={pokemon} species={species} />
+        <PokemonDetailHero pokemonDetails={fullDetails} />
+        <PokemonVitals pokemon={fullDetails} />
       </div>
     );
   }

@@ -20,7 +20,7 @@ export default function PokemonCard({ pokemon }: PokemonCardType) {
         <div
           onClick={() => handleClick(pokemon)}
           // style={backgroundStyle}
-          className="relative flex flex-col shadow-lg rounded-3xl cursor-pointer transition-transform hover:-translate-y-1 duration-300 group hover:border-current hover:shadow-2xl hover:shadow-current"
+          className="p-4 relative flex flex-col shadow-lg rounded-3xl cursor-pointer transition-transform hover:-translate-y-1 duration-300 group hover:border-current hover:shadow-2xl hover:shadow-current"
           style={{
             color: pokemon.primaryTypeColour,
           }}

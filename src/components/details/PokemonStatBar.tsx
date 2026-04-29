@@ -1,37 +1,55 @@
+import { PokemonStat } from "@/types/custom.types";
 import { CSSProperties } from "react";
-import { typeColours } from "../../utils/consts";
 
 type PokemonStatBarType = {
-  value: number;
-  label: string;
-  mainType: string;
+  stat: PokemonStat;
+  primaryColourHex: string;
 };
 
 export default function PokemonStatBar({
-  value,
-  label,
-  mainType,
+  stat,
+  primaryColourHex,
 }: PokemonStatBarType) {
-  const percentage = Math.round((value / 255) * 100);
+  const percentage = Math.min(100, Math.round((stat.value / 255) * 100));
   const backgroundStyle: CSSProperties = {
-    backgroundColor: typeColours[mainType],
+    backgroundColor: primaryColourHex,
     backgroundImage: "linear-gradient(rgb(0 0 0/40%) 0 0)",
   };
   const fillStyle: CSSProperties = {
-    height: `${percentage}%`,
-    backgroundColor: typeColours[mainType],
+    width: `${percentage}%`,
+    backgroundColor: primaryColourHex,
   };
+
+  const statLabel = (value: string) => {
+    switch (value) {
+      case "hp":
+        return "HP";
+      case "attack":
+        return "Attack";
+      case "defense":
+        return "Defense";
+      case "special-attack":
+        return "Sp. Atk";
+      case "special-defense":
+        return "Sp. Def";
+      case "speed":
+        return "Speed";
+      default:
+        return value;
+    }
+  };
+
   return (
-    <div className="flex flex-col">
-      <div style={backgroundStyle} className="h-[255px] relative">
-        <div className="absolute bottom-2 left-0 right-0 text-center z-10">
-          {value}
-        </div>
-        <div style={fillStyle} className="absolute bottom-0 left-0 right-0" />
+    <div>
+      <div className="flex justify-between">
+        <span className="text-sm text-secondary-text">
+          {statLabel(stat.label)}
+        </span>
+        <span>{stat.value}</span>
       </div>
-      <span className="text-[10px] sm:text-sm lg:text-base w-full text-center capitalize">
-        {label}
-      </span>
+      <div style={backgroundStyle} className="w-full h-4 rounded-xl">
+        <div style={fillStyle} className="h-full rounded-xl" />
+      </div>
     </div>
   );
 }

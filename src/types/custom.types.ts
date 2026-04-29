@@ -7,6 +7,11 @@ export type PokemonCardData = {
   types: string[];
 };
 
+export type PokemonStat = {
+  label: string;
+  value: number;
+};
+
 export type PokemonFullDetailsData = {
   formattedId: string;
   name: string;
@@ -19,4 +24,6 @@ export type PokemonFullDetailsData = {
   weight: number;
   primaryType: string;
   abilities: string[];
+  stats: PokemonStat[];
+  primaryTypeColourHex: string;
 };

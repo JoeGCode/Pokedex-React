@@ -1,4 +1,5 @@
 import PokemonDetailHero from "@/components/details/PokemonDetailHero";
+import PokemonStats from "@/components/details/PokemonStats";
 import PokemonVitals from "@/components/details/PokemonVitals";
 import { usePokemonFullDetails } from "@/hooks/usePokemonFullDetails";
 
@@ -20,6 +21,7 @@ export default function Details({ pokemonName }: { pokemonName: string }) {
       <div className="flex flex-col w-full border border-white/10 rounded-2xl">
         <PokemonDetailHero pokemonDetails={fullDetails} />
         <PokemonVitals pokemon={fullDetails} />
+        <PokemonStats pokemon={fullDetails} />
       </div>
     );
   }

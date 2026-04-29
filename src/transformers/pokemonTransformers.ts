@@ -46,6 +46,13 @@ export function transformToPokemonFullDetails(
 
   const abilities = pokemon.abilities.map((ability) => ability.ability.name);
 
+  const stats = pokemon.stats.map((stat) => ({
+    label: stat.stat.name,
+    value: stat.base_stat,
+  }));
+
+  const primaryTypeColourHex = typeColours[primaryType];
+
   return {
     name: pokemon.name,
     formattedId,
@@ -58,5 +65,7 @@ export function transformToPokemonFullDetails(
     height,
     primaryType,
     abilities,
+    stats,
+    primaryTypeColourHex,
   };
 }
